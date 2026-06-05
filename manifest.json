@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Bulk Google Flow Automator",
+  "description": "Automates Google Flow image generation from bulk prompts, with queueing, retries, and downloads.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "downloads",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://flow.google.com/*",
+    "*://*.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Flow Batch Generator"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://flow.google.com/*",
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "type": "module"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/*.js"
+      ],
+      "matches": [
+        "*://flow.google.com/*",
+        "*://*.google.com/*"
+      ]
+    }
+  ]
+}

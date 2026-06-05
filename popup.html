@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Flow Batch Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="header">
+    <h1>Flow Batch</h1>
+    <div id="status-indicator">Idle</div>
+  </div>
+
+  <div class="tabs">
+    <button data-tab="control" class="tab active">Control</button>
+    <button data-tab="queue" class="tab">Queue</button>
+    <button data-tab="gallery" class="tab">Gallery</button>
+    <button data-tab="settings" class="tab">Settings</button>
+    <button data-tab="logs" class="tab">Logs</button>
+  </div>
+
+  <div class="tab-contents">
+    <div id="control" class="tab-content active">
+      <div class="controls">
+        <button id="startBtn">Start Queue</button>
+        <button id="pauseBtn">Pause Queue</button>
+        <button id="resumeBtn">Resume Queue</button>
+        <button id="stopBtn">Stop Queue</button>
+      </div>
+      <div>
+        <label>Bulk prompts (one per line):</label>
+        <textarea id="bulkPrompts" placeholder="A beautiful sunset over mountains..."></textarea>
+        <div class="inline">
+          <button id="enqueueBtn">Enqueue Prompts</button>
+          <label>From file: <input type="file" id="promptsFile" accept=".txt" /></label>
+        </div>
+      </div>
+    </div>
+
+    <div id="queue" class="tab-content">
+      <div id="queueCounts">Waiting: 0 | Running: 0 | Completed: 0 | Failed: 0</div>
+      <div id="queueList" class="list"></div>
+    </div>
+
+    <div id="gallery" class="tab-content">
+      <div id="galleryList" class="grid"></div>
+    </div>
+
+    <div id="settings" class="tab-content">
+      <label>Delay Between Jobs (ms): <input id="delayBetweenJobs" type="number" value="1000" /></label>
+      <label>Retry Count: <input id="retryCount" type="number" value="2" /></label>
+      <label><input id="autoDownload" type="checkbox" /> Auto Download</label>
+      <label><input id="autoRetry" type="checkbox" /> Auto Retry</label>
+      <label>Download Prefix: <input id="downloadPrefix" type="text" value="image" /></label>
+      <label>File Naming Template: <input id="fileNamingTemplate" type="text" value="{index}-{prompt}.png" /></label>
+      <div><button id="saveSettings">Save Settings</button></div>
+    </div>
+
+    <div id="logs" class="tab-content">
+      <div id="logList" class="list"></div>
+      <div><button id="clearLogs">Clear Logs</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
